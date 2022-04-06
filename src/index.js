@@ -1,7 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 
-const route = require('./lodash/route');
+const route = require('./lodash/frompairs');
 
 const app = express();
 
