@@ -1,21 +1,55 @@
 const express = require('express');
 //const logger = require('./logger')
-
 const router = express.Router();
 
-router.get('/user-profile/:abcd', function(req, res) {
-    console.log(req)
-    console.log(req.params.abcd)
-    res.send('dummy response')
+let arr=['iron man','spiderman','superman','batman'];
+router.get('/GET-movies', function(req, res) {
+    res.send(arr)
 })
 
-router.get('/test-me', function (req, res) {
-    console.log('------------------')
-    console.log(req)
-    console.log('------------------')
-    console.log('These are the request query parameters: ', req.query)
-    res.send('My first ever api!')
+router.get('/movies/:indexNumber', function (req, res) {
+   let mov=Number(req.params.indexNumber)
+   if(mov>=arr.length){
+       res.send("use a valid index")
+   }else{
+    res.send(arr[mov])
+   }
 });
+let obj= [ {
+    id: 1,
+    name: 'The Shining'
+   }, {
+    id: 2,
+    name: 'Incendies'
+   }, {
+    id: 3,
+    name: 'Rang de Basanti'
+   }, {
+    id: 4,
+    name: 'Finding Nemo'
+   }]
+   router.get('/flims', function(req, res) {
+    res.send(obj)
+}) 
+// router.get('/films/:filmId', function (req, res) {
+//     let result='invalid id'
+//     let movid=Number(req.params.filmId)
+//     for(let i=0;i<obj.length;i++){
+//         if(obj[i].id==movid){
+//             result="Id = "+obj[i].id+ " " +"Name = "+obj[i].name;
+//         }
+//     } 
+//     res.send(result);
+//  });
+ router.get('/films/:filmId', function (req, res) {
+    let movid=Number(req.params.filmId)
+    const rest=obj.find((x,index)=>x.id==movid)
+    if(!rest){
+        res.send("Invalid id")
+    }else{
+    res.send("Id = "+rest.id+ " " +"Name = "+rest.name);
+    }
+ });
 
 module.exports = router;
 // adding this comment for no reason
