@@ -28,28 +28,28 @@ let obj= [ {
     id: 4,
     name: 'Finding Nemo'
    }]
-   router.get('/flims', function(req, res) {
+   router.get('/flim', function(req, res) {
     res.send(obj)
 }) 
-// router.get('/films/:filmId', function (req, res) {
-//     let result='invalid id'
-//     let movid=Number(req.params.filmId)
-//     for(let i=0;i<obj.length;i++){
-//         if(obj[i].id==movid){
-//             result="Id = "+obj[i].id+ " " +"Name = "+obj[i].name;
-//         }
-//     } 
-//     res.send(result);
-//  });
- router.get('/films/:filmId', function (req, res) {
+router.get('/films/:filmId', function (req, res) {
+    let result='invalid id'
     let movid=Number(req.params.filmId)
-    const rest=obj.find((x,index)=>x.id==movid)
-    if(!rest){
-        res.send("Invalid id")
-    }else{
-    res.send("Id = "+rest.id+ " " +"Name = "+rest.name);
-    }
+    for(let i=0;i<obj.length;i++){
+        if(obj[i].id==movid){
+            result="Id = "+obj[i].id+ " " +"Name = "+obj[i].name;
+        }
+    } 
+    res.send(result);
  });
+//  router.get('/films/:filmId', function (req, res) {
+//     let movid=Number(req.params.filmId)
+//     const rest=obj.find((x,index)=>x.id==movid)
+//     if(!rest){
+//         res.send("invalid id")
+//     }else{
+//     res.send("Id = "+rest.id+ " " +"Name = "+rest.name);
+//     }
+//  });
 
 module.exports = router;
 // adding this comment for no reason
