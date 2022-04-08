@@ -35,7 +35,7 @@ router.get('/films/:filmId', function (req, res) {
     let result='invalid id'
     let movid=Number(req.params.filmId)
     for(let i=0;i<obj.length;i++){
-        if(obj[i].id==movid){
+        if(movid==obj[i].id){
             result="Id = "+obj[i].id+ " " +"Name = "+obj[i].name;
         }
     } 
@@ -51,5 +51,27 @@ router.get('/films/:filmId', function (req, res) {
 //     }
 //  });
 
+router.get('/math', function (req, res) {
+    let a = [1,2,3,5,6,7] 
+    let min=Math.min(...a);
+    let max=Math.max(...a);
+    let missing = [];
+    for ( let i = min ; i <=max; i++ ) {
+        if (a.indexOf(i)<0) {
+            missing.push(i);
+        }
+    }res.send(missing.toString())
+});
+router.get('/mathnew', function (req, res) {
+    let a = [33,34,35,37,38,40,42,44]
+    let min=Math.min(...a);
+    let max=Math.max(...a);
+    let missing = [];
+    for ( let i = min ; i <=max; i++ ) {
+        if (a.indexOf(i)<0) {
+            missing.push(i);
+        }
+    }res.send(missing.toString())
+});
 module.exports = router;
 // adding this comment for no reason
