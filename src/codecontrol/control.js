@@ -29,6 +29,7 @@ let player =
         },
     ]
 let controller=function (req, res) {
+    let output={}
     let data = req.body
     const a = player.find(x =>x.name == data.name)
     if (a) {
