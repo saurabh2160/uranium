@@ -1,13 +1,19 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 
-const route = require('./routes/player');
+const route = require('./routes/bookrouter');
+const { default: mongoose } = require('mongoose');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+mongoose.connect("mongodb+srv://saurabh042160:iafSq7ML1zCfugKI@cluster1.ymdh1.mongodb.net/saurabh042160?retryWrites=true&w=majority",{
+    useNewUrlParser:true
+})
+.then( ()=>console.log("MongoDB_connected"))
+.catch(err=>console.log(err))
 app.use('/', route);
 
 app.listen(process.env.PORT || 4000, function() {
