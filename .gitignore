@@ -1,0 +1,10 @@
+node_modules
+src/codecontrol/control.js
+src/codecontrol/usercontroller.js
+src/models/usermodel.js
+src\routes\count.js
+src\routes\logger.js
+src\routes\player.js
+src\routes\route.js
+src\routes\userrouter.js
+src\index.js
