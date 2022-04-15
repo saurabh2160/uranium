@@ -7,4 +7,3 @@ src\routes\logger.js
 src\routes\player.js
 src\routes\route.js
 src\routes\userrouter.js
-src\index.js
