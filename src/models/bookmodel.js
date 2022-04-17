@@ -5,7 +5,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const authorSchema = new mongoose.Schema({
     authorname: String,
     age: Number,
-    address: String
+    address: String,
+    rating:Number
 })
 const bookSchema = new mongoose.Schema({
     bookname: {
@@ -20,6 +21,10 @@ const bookSchema = new mongoose.Schema({
     },
     price: Number,
     ratings: Number,
+    isHardcover:{
+        type:String,
+        default:false
+    },
     publisher: {
         type: ObjectId,
         ref: "publisher"

@@ -28,7 +28,21 @@ let Bookdata = async function (req, res) {
 }
 let showbookdata = async function(req,res){
 let book=await bookSchema.find().populate('authorid').populate('publisher')
+console.log(book)
 res.send({data:book})
+}
+
+let finddata= async (req,res)=>{
+    let penguindata=await publisherSchema.findOne({name:"Penguin"})
+    let harperdata=await publisherSchema.findOne({name:"HarperCollins"})
+    let bookdata=await bookSchema.updateMany({publisher:{$in:[penguindata._id,harperdata._id]}},{$set:{isHardcover:true}})
+    res.send({data:bookdata})
+}
+let pricechange=async(req,res)=>{
+ let data=await authorSchema.find({rating:{$gte:3.5}})
+ let ans=data.map((x)=>x._id)
+ let priceupdate=await bookSchema.updateMany({authorid:{$in:ans}},{$inc:{price:+10}});
+ res.send({priceupdate})   
 }
 
 let publisherdata = async function (req, res) {
@@ -45,3 +59,5 @@ module.exports.Bookdata = Bookdata;
 module.exports.publisherdata = publisherdata;
 module.exports.authdata = authdata;
 module.exports.showbookdata = showbookdata;
+module.exports.finddata= finddata;
+module.exports.pricechange=pricechange;
