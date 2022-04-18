@@ -35,13 +35,13 @@ res.send({data:book})
 let finddata= async (req,res)=>{
     let penguindata=await publisherSchema.findOne({name:"Penguin"})
     let harperdata=await publisherSchema.findOne({name:"HarperCollins"})
-    let bookdata=await bookSchema.updateMany({publisher:{$in:[penguindata._id,harperdata._id]}},{$set:{isHardcover:true}})
+    let bookdata=await bookSchema.updateMany({publisher:{$in:[penguindata._id,harperdata._id]}},{$set:{isHardcover:true}},{new:true})
     res.send({data:bookdata})
 }
 let pricechange=async(req,res)=>{
  let data=await authorSchema.find({rating:{$gte:3.5}})
  let ans=data.map((x)=>x._id)
- let priceupdate=await bookSchema.updateMany({authorid:{$in:ans}},{$inc:{price:+10}});
+ let priceupdate=await bookSchema.updateMany({authorid:{$in:ans}},{$inc:{price:+40}});
  res.send({priceupdate})   
 }
 
