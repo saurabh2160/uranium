@@ -19,18 +19,23 @@ let getdata = async (req, res) => {
     let prg = req.query.program
     let batch = await batchschema.find({ program: prg })
     let data = batch.map(x => x._id)
-        if (per){
-            if(prg){
-            let result = await devloperschema.find({ 
-                $and: [{ percentage: { $gte: per } }, { batch: data }] }).populate('batch').select({name:1,percentage:1})
-            res.send({ result })
-        }else{
-            res.send({result:"program missing"})
+    if (per) {
+        if (prg) {
+            let result = await devloperschema.find({
+                $and: [{ percentage: { $gte: per } }, { batch: data }]}).populate('batch')
+            if (result.length>0) {
+                res.send({result})
+            }
+            else {
+                res.send({result:"no such person"})
+            }
+        } else {
+            res.send({ result: "program missing" })
         }
-    }else{
-        res.send({result:"percentage missing"})
+    } else {
+        res.send({ result: "percentage missing" })
     }
-    }
+}
 
 // let Bookdata = async function (req, res) {
 //     let bookdata = req.body
