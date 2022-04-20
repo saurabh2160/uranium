@@ -1,9 +1,8 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 
-const route = require('./routes/mwroute');
+const route = require('./assigmentmiddleware2/routers');
 const { default: mongoose } = require('mongoose');
-const { mw1 } = require('./middlewares/mw');
 
 const app = express();
 
@@ -15,7 +14,6 @@ mongoose.connect("mongodb+srv://saurabh042160:iafSq7ML1zCfugKI@cluster1.ymdh1.mo
 })
     .then(() => console.log("MongoDB_connected"))
     .catch(err => console.log(err))
-app.use(mw1)
 app.use('/', route);
 
 app.listen(process.env.PORT || 4000, function () {
