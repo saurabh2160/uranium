@@ -1,11 +1,9 @@
-
-let mw1=  function(req,res,next){
-    let log=true
-if(log===true){
-next();
-}else{
-    res.send({data:"something went wrong"})
+let mw1= (req, res, next)=>{
+    let timestamp=new Date().toLocaleString();
+    let ip=req.socket.remoteAddress
+    let routepath=req.url
+    console.log(timestamp+" "+ip+" "+routepath)
+    next();
 }
 
-}
 module.exports.mw1=mw1;
