@@ -1,13 +1,16 @@
+
 const express = require('express');
-const middleware=require('./middlewares')
-const control=require('./codecontroller')
 const router = express.Router();
-
-router.post('/createuser',middleware.headerval,control.userdata)
-router.post('/createproduct',middleware.headerval,control.productdata)
-router.post('/orderpurchase',middleware.headerval,control.orderdata)
+const userController= require("../assignmentauth-1.js/coodecontroller")
+//const middlware=require('../assignmentauth-1.js/middlewares')
 
 
+router.post("/users", userController.createUser  )
 
+router.post("/login", userController.loginUser)
+
+router.get("/users/:userId", userController.getUserData)
+
+router.put("/users/:userId", userController.updateUser)
 
 module.exports = router;
