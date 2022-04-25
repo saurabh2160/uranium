@@ -9,10 +9,11 @@ const mdlwr = async (req, res, next) => {
         let decodedtoken = jwt.verify(token, "functionup-uranium");
         let userloged = decodedtoken.userId
         let userId = req.params.userId;
-        let del = await userSchema.findById(userId)//.catch(err=>null)
         if (userloged !== userId) {
             return res.status(401).send({ status: false, data: "user ID does not match" })
-        } if (del.isDeleted !== false) {
+        } 
+        let del = await userSchema.findById(userId)
+        if (del.isDeleted !== false) {
             return res.status(404).send({ status: false, data: "user missing" })
         }
     }

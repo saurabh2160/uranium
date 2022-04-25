@@ -10,7 +10,10 @@ const createUser = async function (req, res) {
 const loginUser = async function (req, res) {
     let userName = req.body.emailId;
     let password = req.body.password;
-
+    //console.log(Object.keys(userName).length)
+    if (Object.keys(userName).length <= 0 && Object.keys(userName).length) {
+        return res.status(406).send({ status: false, msg: "user ID & password must be present" })
+    }
     let user = await userSchema.findOne({ emailId: userName, password: password }).catch(err => null)
     if (!user)
         return res.status(406).send({
@@ -56,7 +59,7 @@ const userlog = async function (req, res) {
 
     let userId = req.params.userId;
 
-    let user = await userSchema.findOne({_id:userId}).catch(err => null)
+    let user = await userSchema.findOne({ _id: userId }).catch(err => null)
     if (!user) {
         return res.status(404).send("No such user exists");
     }
